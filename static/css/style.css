@@ -39,7 +39,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 { font-size: 2.0em; }
-h2 { font-size: 1.6em; border-bottom: 1px solid #ddd; padding-bottom: 5px; overflow:hidden }
+h2 { font-size: 1.6em; padding-bottom: 5px; overflow:hidden }
 h3 { font-size: 1.4em; }
 h4 { font-size: 1.2em; }
 h5 { font-size: 1.0em; }
@@ -173,17 +173,28 @@ pre code {
 .post-nav a { color: #555; }
 .post-nav a:hover { color: black; }
 
+.category {
+    float: left;
+    width: 130px;
+}
+
 .category a { color: #10a1e7; } # 修改
 .category a:hover { color: black; }
 
+.category h2 {
+    color: #aaa;
+}
+
 .category_pages ul {
-  padding-left: 0;
+    float: left;
+    padding-left: 0;
 }
 
 li.pagelist {
-    width: 100%;
+    width: 75%;
     margin-right: 1.5em;
     list-style-type: none;
+    white-space: nowrap;
     overflow: hidden;
 }
 
