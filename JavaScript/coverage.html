@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <link rel="Stylesheet" type="text/css" href="/static/css/style.css">
+    <link rel="Stylesheet" type="text/css" href="/static/css/tango.css">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="alternate" type="application/atom+xml" href="atom.xml" title="Atom feed">
+    
+    <title class="site-title">coverage - Stardust Wiki</title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content="Azeril's Personal Wiki"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    <div id="container">
+      
+<div id="header">
+  <div class="post-nav"><a href="/">Home</a>&nbsp;&#187;&nbsp;<a href="/#JavaScript">JavaScript</a>&nbsp;&#187;&nbsp;coverage
+    <span class="updated">Page Updated&nbsp;
+      2014-06-14 15:00
+    </span></div>
+</div>
+<div class="clearfix"></div>
+
+<div class="page_title">coverage</div>
+
+  <p><a href="http://nedbatchelder.com/code/coverage/">文档</a> | <a href="https://pypi.python.org/pypi/coverage">项目主页</a></p>
+<blockquote>
+<p>Measure, collect, and report on code coverage in Python programs.</p>
+</blockquote>
+<p>主要用于测试代码覆盖率，收集统计生成报表。</p>
+<p>安装:</p>
+<div class="hlcode"><pre><span class="n">pip</span> <span class="n">install</span> <span class="n">coverage</span>
+</pre></div>
+
+
+<p>常用的一些操作:</p>
+<p>执行统计:</p>
+<div class="hlcode"><pre><span class="n">coverage</span> <span class="n">run</span> <span class="n">setup</span><span class="p">.</span><span class="n">py</span> <span class="o">-</span><span class="n">q</span> <span class="n">nosetests</span>
+</pre></div>
+
+
+<p>会生成一个<code>.coverage</code>的统计文件。然后可以配合其它子命令如<code>report</code>显示统计结果。</p>
+<p>选项<code>--branch</code>, 增加分支覆盖率, 见<a href="http://nedbatchelder.com/code/coverage/branch.html#branch">文档</a>.</p>
+<p>清除统计数据：</p>
+<p>上面的run命令会生成统计文件，使用<code>coverage erase</code>可以清除生成的文件。</p>
+<p>生成统计报表:</p>
+<p>通过<code>coverage run</code>生成的统计文件，显示出统计结果：</p>
+<div class="hlcode"><pre><span class="n">coverage</span> <span class="n">report</span>
+</pre></div>
+
+
+<p>coverage也可以将结果生成为html，并且点击html里各个模块的文件名，还可以看到此模块详细的覆盖范围，哪些没有被覆盖到。</p>
+<div class="hlcode"><pre><span class="n">coverage</span> <span class="n">html</span>
+</pre></div>
+
+
+<p>还可以转为xml格式</p>
+<p>其它命令可参考<a href="http://nedbatchelder.com/code/coverage/cmd.html#cmd">Coverage command line usage</a></p>
+<p>配置:</p>
+<p>coverage的配置文件默认是<code>.coveragerc</code>，放在项目根目录下就行，coverage测试时会寻找当前目录下的此配置文件。<a href="http://nedbatchelder.com/code/coverage/config.html#config">文档</a></p>
+<p>相关项目: <a href="https://github.com/coagulant/coveralls-python">coveralls</a></p>
+<p><a href="https://github.com/coagulant/coveralls-python">coveralls.io</a> 是一个在线显示代码覆盖率统计的服务。<br />
+<a href="http://en.wikipedia.org/wiki/Code_coverage">Code coverage</a><br />
+<a href="http://www.cnblogs.com/coderzh/archive/2009/03/29/1424344.html">代码覆盖率浅谈</a></p>
+    </div>
+    <div id="footer">
+      <span>
+        <p>Copyright © 2017 Azeril.
+        Powered by <a href="http://simiki.org/" target="_blank">Simiki</a>.</p>
+      </span>
+    </div>
+
+    
+    
+  </body>
+</html>

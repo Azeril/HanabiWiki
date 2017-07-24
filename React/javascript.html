@@ -1,0 +1,172 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <link rel="Stylesheet" type="text/css" href="/static/css/style.css">
+    <link rel="Stylesheet" type="text/css" href="/static/css/tango.css">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="alternate" type="application/atom+xml" href="atom.xml" title="Atom feed">
+    
+    <title class="site-title">JavaScript - Stardust Wiki</title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content="Azeril's Personal Wiki"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    <div id="container">
+      
+<div id="header">
+  <div class="post-nav"><a href="/">Home</a>&nbsp;&#187;&nbsp;<a href="/#React">React</a>&nbsp;&#187;&nbsp;JavaScript
+    <span class="updated">Page Updated&nbsp;
+      2016-10-03 11:00
+      
+    </span></div>
+</div>
+<div class="clearfix"></div>
+
+<div class="page_title">JavaScript</div>
+
+  <div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#tips">Tips</a><ul>
+<li><a href="#documentreadyfunction-vs-function">$(document).ready(function() {}) vs $(function(){})</a></li>
+<li><a href="#_1">如何复制一个对象</a></li>
+<li><a href="#clickajax">click事件在Ajax下失效问题</a></li>
+</ul>
+</li>
+<li><a href="#_2">其它</a></li>
+</ul>
+</div>
+<h2 id="tips">Tips</h2>
+<h3 id="documentreadyfunction-vs-function">$(document).ready(function() {}) vs $(function(){})</h3>
+<p>以前入门学习都是见的前者这种格式:</p>
+<div class="hlcode"><pre><span class="c1">// 方式1</span>
+<span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+  <span class="p">...</span>
+<span class="p">});</span>
+</pre></div>
+
+
+<p>最近见到不少这种写法：</p>
+<div class="hlcode"><pre><span class="c1">// 方式2</span>
+<span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="p">...</span>
+<span class="p">});</span>
+</pre></div>
+
+
+<p>这两种实际是<strong>等价</strong>的，后者是前者的简写。</p>
+<p>方式1还可以写为：</p>
+<div class="hlcode"><pre><span class="c1">// 方式3, 不推荐</span>
+<span class="nx">$</span><span class="p">().</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+  <span class="p">...</span>
+<span class="p">});</span>
+</pre></div>
+
+
+<p>这三种都是在<strong>DOM被加载后</strong>才执行。</p>
+<p>参考:</p>
+<ul>
+<li><a href="http://stackoverflow.com/questions/9396415/differences-between-document-ready-and-function">Differences between document.ready and $function</a></li>
+<li><a href="http://stackoverflow.com/questions/3528509/document-readyfunction-vs-function">$(document).ready(function() VS $(function(){</a></li>
+</ul>
+<p>再拓展下，这种写法：</p>
+<div class="hlcode"><pre><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="p">...</span>
+<span class="p">});</span>
+</pre></div>
+
+
+<p>这个是定义一个匿名函数，并在浏览器开始解释js脚本时就会执行。</p>
+<p>比如之前用过的扩展jQuery：</p>
+<div class="hlcode"><pre><span class="c1">// http://stackoverflow.com/a/4180972/1276501</span>
+<span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">$</span><span class="p">.</span><span class="nx">fn</span><span class="p">.</span><span class="nx">outerHTML</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">clone</span><span class="p">().</span><span class="nx">wrap</span><span class="p">(</span><span class="s1">&#39;&lt;div&gt;&lt;/div&gt;&#39;</span><span class="p">).</span><span class="nx">parent</span><span class="p">().</span><span class="nx">html</span><span class="p">();</span>
+  <span class="p">};</span>
+<span class="p">})(</span><span class="nx">jQuery</span><span class="p">);</span>
+</pre></div>
+
+
+<p>参考：<a href="http://stackoverflow.com/questions/3259496/jquery-document-ready-vs-self-calling-anonymous-function">jQuery document.ready vs self calling anonymous function</a></p>
+<p>这个总结挺好<a href="http://stackoverflow.com/a/3259561/1276501">from</a>：</p>
+<ul>
+<li>
+<p><code>$(document).ready(function(){ ... });</code> or short <code>$(function(){...});</code></p>
+<p>This Function is called when the <code>DOM is ready</code> which means, you can start to <strong>query</strong> elements for instance. <code>.ready()</code> will use different ways on different browsers to make sure that the DOM really IS ready.</p>
+</li>
+<li>
+<p><code>(function(){ ... })();</code></p>
+<p>That is nothing else than a function that <strong>invokes itself</strong> as soon as possible when the browser is interpreting your <code>ecma-/javascript</code>. Therefor, its very unlikely that you can successfully act on <code>DOM elements</code> here.</p>
+</li>
+</ul>
+<h3 id="_1">如何复制一个对象</h3>
+<p>涉及到深复制和浅复制的问题</p>
+<p>参考SO上回答：<a href="http://stackoverflow.com/questions/122102/what-is-the-most-efficient-way-to-clone-an-object-in-javascript">What is the most efficient way to clone an object in JavaScript?</a></p>
+<p>最简单的答案，通过jQuery来处理。注意我之前在搜相关API时，也看到下面提到的clone这个方法，不过看文档说是针对DOM的。</p>
+<p>I want to note that the <a href="http://api.jquery.com/clone/"><code>.clone()</code></a> method in jQuery only clones DOM elements. In order to clone JavaScript objects, you would do:</p>
+<div class="hlcode"><pre><span class="c1">// Shallow copy</span>
+<span class="kd">var</span> <span class="nx">newObject</span> <span class="o">=</span> <span class="nx">jQuery</span><span class="p">.</span><span class="nx">extend</span><span class="p">({},</span> <span class="nx">oldObject</span><span class="p">);</span>
+
+<span class="c1">// Deep copy</span>
+<span class="kd">var</span> <span class="nx">newObject</span> <span class="o">=</span> <span class="nx">jQuery</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="p">{},</span> <span class="nx">oldObject</span><span class="p">);</span>
+</pre></div>
+
+
+<p>More information can be found in the <a href="http://api.jquery.com/jQuery.extend/">jQuery documentation</a>.</p>
+<p>I also want to note that the deep copy is actually much smarter than what is shown above – it's able to avoid many traps (trying to deep extend a DOM element, for example). It's used frequently in jQuery core and in plugins to great effect.</p>
+<p>其它参考：</p>
+<ul>
+<li><a href="https://www.zhihu.com/question/23031215">javascript中的深拷贝和浅拷贝？</a></li>
+<li><a href="https://segmentfault.com/q/1010000000148290">在javascript里怎样方便的克隆一个object</a></li>
+</ul>
+<h3 id="clickajax">click事件在Ajax下失效问题</h3>
+<p>最开始给一个click事件写一个Ajax，更新#board的html内容：</p>
+<div class="hlcode"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#board&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">()</span> <span class="p">{</span>
+        <span class="p">...</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+</pre></div>
+
+
+<p>但是在点击一次后，后续点击就不再触发click事件了。</p>
+<p>搜了下，针对<code>.click()</code>，因为ajax中有replace替换了原来绑定了这个事件的元素(element)，所以导致失效。</p>
+<p><code>.on()</code>方法使用<code>事件代理(event delegation)</code>，可以保证在动态元素上：</p>
+<div class="hlcode"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;document&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="s2">&quot;#board&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">()</span> <span class="p">{</span>
+        <span class="p">...</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+</pre></div>
+
+
+<p>参考：</p>
+<ul>
+<li><a href="http://stackoverflow.com/questions/13767919/jquery-event-wont-fire-after-ajax-call">Jquery Event wont fire after ajax call</a></li>
+<li><a href="http://stackoverflow.com/questions/9272438/jquery-click-event-not-firing-on-ajax-loaded-html-elements">jQuery click() event not firing on AJAX loaded HTML elements</a></li>
+</ul>
+<h2 id="_2">其它</h2>
+<ul>
+<li><a href="https://jquery.com/">jQuery官网</a></li>
+</ul>
+  <div class="relation">
+    <h2>Related</h2>
+    <ul>
+    
+    <li><a href="/React/eloquent-javascript.html">JavaScript编程精解</a></li>
+    
+    </ul>
+  </div>
+    </div>
+    <div id="footer">
+      <span>
+        <p>Copyright © 2017 Azeril.
+        Powered by <a href="http://simiki.org/" target="_blank">Simiki</a>.</p>
+      </span>
+    </div>
+
+    
+    
+  </body>
+</html>

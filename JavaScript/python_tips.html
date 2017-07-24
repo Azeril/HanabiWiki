@@ -1,0 +1,137 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <link rel="Stylesheet" type="text/css" href="/static/css/style.css">
+    <link rel="Stylesheet" type="text/css" href="/static/css/tango.css">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="alternate" type="application/atom+xml" href="atom.xml" title="Atom feed">
+    
+    <title class="site-title">Python Tips - Stardust Wiki</title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content="Azeril's Personal Wiki"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    <div id="container">
+      
+<div id="header">
+  <div class="post-nav"><a href="/">Home</a>&nbsp;&#187;&nbsp;<a href="/#JavaScript">JavaScript</a>&nbsp;&#187;&nbsp;Python Tips
+    <span class="updated">Page Updated&nbsp;
+      2016-04-18 11:40
+      
+    </span></div>
+</div>
+<div class="clearfix"></div>
+
+<div class="page_title">Python Tips</div>
+
+  <div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#variable-with-underscore">variable with underscore</a></li>
+<li><a href="#property-method">property method</a></li>
+<li><a href="#md5">计算目录的md5</a></li>
+<li><a href="#pip-install-from-git-repo">pip install from git repo</a></li>
+<li><a href="#virtualenv">virtualenv对系统级包的策略</a></li>
+<li><a href="#listdict">list和dict释放空间</a></li>
+</ul>
+</div>
+<h3 id="variable-with-underscore">variable with underscore</h3>
+<ul>
+<li><a href="https://docs.python.org/2/tutorial/classes.html#private-variables-and-class-local-references">Python Docs - Private Variables and Class-local References</a></li>
+<li><a href="http://stackoverflow.com/questions/1301346/the-meaning-of-a-single-and-a-double-underscore-before-an-object-name-in-python">The meaning of a single- and a double-underscore before an object name in Python</a></li>
+<li><a href="http://stackoverflow.com/questions/6930144/underscore-vs-double-underscore-with-variables-and-methods">Underscore vs Double underscore with variables and methods</a></li>
+<li><a href="http://radek.io/2011/07/21/private-protected-and-public-in-python/">Private, protected and public in Python</a></li>
+</ul>
+<p>@nmichaels's answer:</p>
+<div class="hlcode"><pre><span class="o">-</span> <span class="n">_single_leading_underscore</span><span class="o">:</span> <span class="n">weak</span> <span class="s">&quot;internal use&quot;</span> <span class="n">indicator</span><span class="p">.</span>  <span class="n">E</span><span class="p">.</span><span class="n">g</span><span class="p">.</span> <span class="s">&quot;from M</span>
+  <span class="n">import</span> <span class="o">*</span><span class="s">&quot; does not import objects whose name starts with an underscore.</span>
+
+<span class="o">-</span> <span class="n">single_trailing_underscore_</span><span class="o">:</span> <span class="n">used</span> <span class="n">by</span> <span class="n">convention</span> <span class="n">to</span> <span class="n">avoid</span> <span class="n">conflicts</span> <span class="n">with</span>
+  <span class="n">Python</span> <span class="n">keyword</span><span class="p">,</span> <span class="n">e</span><span class="p">.</span><span class="n">g</span><span class="p">.</span>
+
+  <span class="n">Tkinter</span><span class="p">.</span><span class="n">Toplevel</span><span class="p">(</span><span class="n">master</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="err">&#39;</span><span class="n">ClassName</span><span class="err">&#39;</span><span class="p">)</span>
+
+<span class="o">-</span> <span class="n">__double_leading_underscore</span><span class="o">:</span> <span class="n">when</span> <span class="n">naming</span> <span class="n">a</span> <span class="n">class</span> <span class="n">attribute</span><span class="p">,</span> <span class="n">invokes</span> <span class="n">name</span>
+  <span class="n">mangling</span> <span class="p">(</span><span class="n">inside</span> <span class="n">class</span> <span class="n">FooBar</span><span class="p">,</span> <span class="n">__boo</span> <span class="n">becomes</span> <span class="n">_FooBar__boo</span><span class="p">;</span> <span class="n">see</span> <span class="n">below</span><span class="p">).</span>
+
+<span class="o">-</span> <span class="n">__double_leading_and_trailing_underscore__</span><span class="o">:</span> <span class="s">&quot;magic&quot;</span> <span class="n">objects</span> <span class="n">or</span>
+  <span class="n">attributes</span> <span class="n">that</span> <span class="n">live</span> <span class="n">in</span> <span class="n">user</span><span class="o">-</span><span class="n">controlled</span> <span class="n">namespaces</span><span class="p">.</span>  <span class="n">E</span><span class="p">.</span><span class="n">g</span><span class="p">.</span> <span class="n">__init__</span><span class="p">,</span>
+  <span class="n">__import__</span> <span class="n">or</span> <span class="n">__file__</span><span class="p">.</span>  <span class="n">Never</span> <span class="n">invent</span> <span class="n">such</span> <span class="n">names</span><span class="p">;</span> <span class="n">only</span> <span class="n">use</span> <span class="n">them</span>
+  <span class="n">as</span> <span class="n">documented</span><span class="p">.</span>
+</pre></div>
+
+
+<h3 id="property-method">property method</h3>
+<ul>
+<li><a href="https://docs.python.org/2/library/functions.html#property">Python Docs - property</a></li>
+<li><a href="http://stackoverflow.com/questions/6618002/python-property-versus-getters-and-setters">Python @property versus getters and setters</a></li>
+<li><a href="http://python.jobbole.com/80955/">Python进阶之“属性（property）”详解</a></li>
+<li><a href="http://www.python-course.eu/python3_properties.php">Properties vs. Getters and Setters</a></li>
+</ul>
+<h3 id="md5">计算目录的md5</h3>
+<p>也就是遍历目录, 计算所有文件内容合并后的md5值。</p>
+<p><strong>注意</strong>: 保证遍历目录的路径是一致的, 否则跨平台遍历方式不一致导致md5不同。</p>
+<p>见Simiki中的实现: <a href="https://github.com/tankywoo/simiki/commit/09039e10a9eba2436b1ec74c5d8a6e1cf84c0f5b">Add directory md5 hash function</a>, 另外, 这个可能还需要考虑内存溢出的情况? TODO</p>
+<p>另外可参考:</p>
+<ul>
+<li><a href="http://unix.stackexchange.com/questions/35832/how-do-i-get-the-md5-sum-of-a-directorys-contents-as-one-sum">How do I get the MD5 sum of a directory's contents as one sum?</a></li>
+<li><a href="http://code.activestate.com/recipes/576973-getting-the-sha-1-or-md5-hash-of-a-directory/">Getting the SHA-1 (or MD5) hash of a directory (Python recipe)</a></li>
+</ul>
+<h3 id="pip-install-from-git-repo">pip install from git repo</h3>
+<div class="hlcode"><pre><span class="err">$</span> <span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">e</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="o">:</span><span class="c1">//github.com/username/projname.git#egg=projname</span>
+</pre></div>
+
+
+<p>参考:</p>
+<ul>
+<li><a href="http://stackoverflow.com/questions/20101834/pip-install-from-github-repo-branch">pip install from github repo branch</a></li>
+<li><a href="https://pip.pypa.io/en/latest/reference/pip_install/#vcs-support">pip doc - VCS Support</a></li>
+</ul>
+<h3 id="virtualenv">virtualenv对系统级包的策略</h3>
+<p>最近发现使用virtualenv进入一个隔离环境时, 每次cd切换目录都会报错, 原因是autojump(py写的)模块找不到。</p>
+<p>排查后发现是系统级的python包目录不在<code>sys.path</code>中。</p>
+<p>看了virtualenv的changelog发现这个是在1.7版本做的变更:</p>
+<ul>
+<li>virtualenv-1.7 之前, 默认策略是把把系统包路径也加入 <code>sys.path</code>. 有 <code>--no-site-packages</code> 在创建虚拟环境时, 可以不加入系统包路径.</li>
+<li>virtualenv-1.7和之后, 默认策略是上面的 <code>--no-site-packages</code>. 并且增加了新选项 <code>--system-site-packages</code>, 即上面情况的默认策略.</li>
+</ul>
+<p>具体可以看看virtualenv 的 <a href="https://virtualenv.pypa.io/en/latest/changes.html">changelog</a></p>
+<p>我之前应该很长一阵子都处于1.7之前的版本, 最近才作了下升级.</p>
+<h3 id="listdict">list和dict释放空间</h3>
+<p>list:</p>
+<ul>
+<li><a href="http://stackoverflow.com/questions/12417498/how-to-release-used-memory-immediately-in-python-list">how to release used memory immediately in python list?</a></li>
+<li><a href="http://stackoverflow.com/questions/2055107/python-memory-del-list-vs-list">python memory del <code>list[:]</code> vs <code>list = []</code></a></li>
+</ul>
+<!-- -->
+
+<ul>
+<li><code>a = []</code> 新赋值, 其它引用不变</li>
+<li><code>del a</code> 删除a, 其它引用不变</li>
+<li><code>del a[:]</code> 清空a的元素, 所有引用和a保持一样变化, 也为空</li>
+</ul>
+<p>dict:</p>
+<ul>
+<li><a href="http://stackoverflow.com/questions/369898/difference-between-dict-clear-and-assigning-in-python">Difference between dict.clear() and assigning {} in Python</a></li>
+<li><a href="http://stackoverflow.com/questions/10446839/does-dictionarys-clear-method-delete-all-the-item-related-objects-from-memory">Does dictionary's clear() method delete all the item related objects from memory?</a></li>
+</ul>
+<!-- -->
+
+<ul>
+<li><code>d = {}</code> 新赋值，其它引用不变</li>
+<li><code>del d</code> 删除d, 其它引用不变</li>
+<li><code>d.clear()</code> 清空d的元素, 所有引用和d保持一样变化, 也为空</li>
+</ul>
+    </div>
+    <div id="footer">
+      <span>
+        <p>Copyright © 2017 Azeril.
+        Powered by <a href="http://simiki.org/" target="_blank">Simiki</a>.</p>
+      </span>
+    </div>
+
+    
+    
+  </body>
+</html>
