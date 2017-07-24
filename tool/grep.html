@@ -1,0 +1,116 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <link rel="Stylesheet" type="text/css" href="/static/css/style.css">
+    <link rel="Stylesheet" type="text/css" href="/static/css/tango.css">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="alternate" type="application/atom+xml" href="atom.xml" title="Atom feed">
+    
+    <title class="site-title">grep - Stardust Wiki</title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content="Azeril's Personal Wiki"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    <div id="container">
+      
+<div id="header">
+  <div class="post-nav"><a href="/">Home</a>&nbsp;&#187;&nbsp;<a href="/#tool">tool</a>&nbsp;&#187;&nbsp;grep
+    <span class="updated">Page Updated&nbsp;
+      2013-08-17 07:32
+    </span></div>
+</div>
+<div class="clearfix"></div>
+
+<div class="page_title">grep</div>
+
+  <p>格式:</p>
+<div class="hlcode"><pre><span class="n">grep</span> <span class="p">[</span><span class="n">OPTIONS</span><span class="p">]</span> <span class="n">PATTERN</span> <span class="p">[</span><span class="kt">FILE</span><span class="p">...]</span>
+
+<span class="n">grep</span> <span class="p">[</span><span class="n">OPTIONS</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">e</span> <span class="n">PATTERN</span> <span class="o">|</span> <span class="o">-</span><span class="n">f</span> <span class="kt">FILE</span><span class="p">]</span> <span class="p">[</span><span class="kt">FILE</span><span class="p">...]</span>
+</pre></div>
+
+
+<p><code>egrep</code>, <code>fgrep</code> 等都是 grep 的变种和扩展:</p>
+<div class="hlcode"><pre><span class="n">egrep</span> <span class="o">==</span> <span class="n">grep</span> <span class="o">-</span><span class="n">E</span>
+<span class="n">fgrep</span> <span class="o">==</span> <span class="n">grep</span> <span class="o">-</span><span class="n">F</span>
+</pre></div>
+
+
+<h2 id="_1">参数</h2>
+<p><code>-e</code><br />
+This can be used to specify multiple search patterns</p>
+<p><code>-f</code><br />
+Obtain patterns from FILE, one per line.</p>
+<p><code>-i | --ignore-case</code> : 忽略大小写</p>
+<p><code>-v</code><br />
+--invert-match</p>
+<p><code>-w</code><br />
+--word-regexp</p>
+<p><code>-x</code><br />
+--line-regexp</p>
+<p><code>-c</code><br />
+print the match line number</p>
+<p><code>-m</code></p>
+<p><code>-n, --line-number</code> : 打印行号</p>
+<div class="hlcode"><pre><span class="n">TankyWoo</span><span class="err">@</span><span class="n">Mac</span><span class="o">-</span><span class="n">OS</span><span class="o">::</span><span class="n">tool</span><span class="o">/</span> <span class="p">(</span><span class="n">master</span><span class="o">*</span><span class="p">)</span> <span class="err">»</span> <span class="n">grep</span> <span class="err">&#39;</span><span class="n">tankywoo</span><span class="err">&#39;</span> <span class="n">ssh</span><span class="p">.</span><span class="n">md</span>
+                <span class="n">IdentityFile</span> <span class="o">~/</span><span class="p">.</span><span class="n">ssh</span><span class="o">/</span><span class="n">tankywoo</span>     <span class="err">#</span> <span class="n">tankywoo</span><span class="err">就是私钥文件</span>
+<span class="n">TankyWoo</span><span class="err">@</span><span class="n">Mac</span><span class="o">-</span><span class="n">OS</span><span class="o">::</span><span class="n">tool</span><span class="o">/</span> <span class="p">(</span><span class="n">master</span><span class="o">*</span><span class="p">)</span> <span class="err">»</span> <span class="n">grep</span> <span class="o">-</span><span class="n">n</span> <span class="err">&#39;</span><span class="n">tankywoo</span><span class="err">&#39;</span> <span class="n">ssh</span><span class="p">.</span><span class="n">md</span>
+<span class="mi">42</span><span class="o">:</span>             <span class="n">IdentityFile</span> <span class="o">~/</span><span class="p">.</span><span class="n">ssh</span><span class="o">/</span><span class="n">tankywoo</span>     <span class="err">#</span> <span class="n">tankywoo</span><span class="err">就是私钥文件</span>
+</pre></div>
+
+
+<p><code>-R | -r | --recursive</code> : 递归查询</p>
+<p><code>-l, --files-with-matches</code> : 只显示匹配的文件列表</p>
+<p><code>--include</code> : 只搜索匹配指定文件名模式的文件。</p>
+<div class="hlcode"><pre><span class="cp"># 在 souce/_posts 目录下, 在所有以.makrdown后缀文件里搜索含有tankywoo-wiki字符串的行</span>
+<span class="n">grep</span> <span class="o">-</span><span class="n">r</span> <span class="o">--</span><span class="n">include</span> <span class="o">*</span><span class="p">.</span><span class="n">markdown</span> <span class="err">&#39;</span><span class="n">tankywoo</span><span class="o">-</span><span class="n">wiki</span><span class="err">&#39;</span> <span class="n">source</span><span class="o">/</span><span class="n">_posts</span>
+</pre></div>
+
+
+<h2 id="examples">Examples</h2>
+<div class="hlcode"><pre><span class="cp"># The test.file is :</span>
+<span class="n">root</span><span class="err">@</span><span class="n">gentoo</span><span class="o">-</span><span class="n">jl</span> <span class="n">tmp</span> <span class="err">#</span> <span class="n">cat</span> <span class="o">-</span><span class="n">n</span> <span class="n">test</span><span class="p">.</span><span class="n">file</span>
+     <span class="mi">1</span>  <span class="n">TankyWoo</span>
+     <span class="mi">2</span>  <span class="n">tankywoo</span>
+     <span class="mi">3</span>  <span class="n">tank</span>
+     <span class="mi">4</span>  <span class="n">helloworld</span>
+     <span class="mi">5</span>  <span class="n">say</span> <span class="n">hello</span>
+
+<span class="n">root</span><span class="err">@</span><span class="n">gentoo</span><span class="o">-</span><span class="n">jl</span> <span class="n">tmp</span> <span class="err">#</span> <span class="n">grep</span> <span class="o">-</span><span class="n">in</span> <span class="err">&#39;</span><span class="n">tanky</span><span class="err">&#39;</span> <span class="n">test</span><span class="p">.</span><span class="n">file</span>
+<span class="mi">1</span><span class="o">:</span><span class="n">TankyWoo</span>
+<span class="mi">2</span><span class="o">:</span><span class="n">tankywoo</span>
+
+<span class="n">root</span><span class="err">@</span><span class="n">gentoo</span><span class="o">-</span><span class="n">jl</span> <span class="n">tmp</span> <span class="err">#</span> <span class="n">grep</span> <span class="o">-</span><span class="n">in</span> <span class="o">-</span><span class="n">e</span> <span class="err">&#39;</span><span class="n">tanky</span><span class="err">&#39;</span> <span class="o">-</span><span class="n">e</span> <span class="err">&#39;</span><span class="n">hello</span><span class="err">&#39;</span> <span class="n">test</span><span class="p">.</span><span class="n">file</span>
+<span class="mi">1</span><span class="o">:</span><span class="n">TankyWoo</span>
+<span class="mi">2</span><span class="o">:</span><span class="n">tankywoo</span>
+<span class="mi">4</span><span class="o">:</span><span class="n">helloworld</span>
+<span class="mi">5</span><span class="o">:</span><span class="n">say</span> <span class="n">hello</span>
+
+<span class="n">root</span><span class="err">@</span><span class="n">gentoo</span><span class="o">-</span><span class="n">jl</span> <span class="n">tmp</span> <span class="err">#</span> <span class="n">grep</span> <span class="o">-</span><span class="n">inv</span> <span class="err">&#39;</span><span class="n">tanky</span><span class="err">&#39;</span> <span class="n">test</span><span class="p">.</span><span class="n">file</span>
+<span class="mi">3</span><span class="o">:</span><span class="n">tank</span>
+<span class="mi">4</span><span class="o">:</span><span class="n">helloworld</span>
+<span class="mi">5</span><span class="o">:</span><span class="n">say</span> <span class="n">hello</span>
+
+<span class="n">root</span><span class="err">@</span><span class="n">gentoo</span><span class="o">-</span><span class="n">jl</span> <span class="n">tmp</span> <span class="err">#</span> <span class="n">grep</span> <span class="o">-</span><span class="n">in</span> <span class="o">-</span><span class="n">w</span> <span class="err">&#39;</span><span class="n">sa</span><span class="err">&#39;</span> <span class="n">test</span><span class="p">.</span><span class="n">file</span>
+<span class="n">root</span><span class="err">@</span><span class="n">gentoo</span><span class="o">-</span><span class="n">jl</span> <span class="n">tmp</span> <span class="err">#</span> <span class="n">grep</span> <span class="o">-</span><span class="n">in</span> <span class="o">-</span><span class="n">w</span> <span class="err">&#39;</span><span class="n">say</span><span class="err">&#39;</span> <span class="n">test</span><span class="p">.</span><span class="n">file</span>
+<span class="mi">5</span><span class="o">:</span><span class="n">say</span> <span class="n">hello</span>
+
+<span class="n">root</span><span class="err">@</span><span class="n">gentoo</span><span class="o">-</span><span class="n">jl</span> <span class="n">tmp</span> <span class="err">#</span> <span class="n">grep</span> <span class="o">-</span><span class="n">in</span> <span class="o">-</span><span class="n">x</span> <span class="err">&#39;</span><span class="n">say</span><span class="err">&#39;</span> <span class="n">test</span><span class="p">.</span><span class="n">file</span>
+<span class="n">root</span><span class="err">@</span><span class="n">gentoo</span><span class="o">-</span><span class="n">jl</span> <span class="n">tmp</span> <span class="err">#</span> <span class="n">grep</span> <span class="o">-</span><span class="n">in</span> <span class="o">-</span><span class="n">x</span> <span class="err">&#39;</span><span class="n">say</span> <span class="n">hello</span><span class="err">&#39;</span> <span class="n">test</span><span class="p">.</span><span class="n">file</span>
+<span class="mi">5</span><span class="o">:</span><span class="n">say</span> <span class="n">hello</span>
+</pre></div>
+    </div>
+    <div id="footer">
+      <span>
+        <p>Copyright © 2017 Azeril.
+        Powered by <a href="http://simiki.org/" target="_blank">Simiki</a>.</p>
+      </span>
+    </div>
+
+    
+    
+  </body>
+</html>
